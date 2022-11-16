@@ -1,5 +1,8 @@
 ## About Ecommerce
-This is an E-commerce site that builed using laravel.
+This is an E-commerce site that builed using laravel 8.
+
+##Database Schema Design
+Every project need a proper plan or schema design before starting the project.
 
 
 - [Simple, fast routing engine](https://laravel.com/docs/routing).
