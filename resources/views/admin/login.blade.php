@@ -13,9 +13,9 @@
             height: 100vh;
         }
         #login .container #login-row #login-column #login-box {
-            margin-top: 110px;
+            margin-top: 80px;
             max-width: 450px;
-            height: 320px;
+            height:320px;
             box-shadow: 5px 8px 18px #8c8c8c;
             background-color: #EAEAEA;
             border-radius: 5px;
@@ -34,16 +34,24 @@
     <div class="container">
         <div id="login-row" class="row justify-content-center align-items-center">
             <div id="login-column" class="col-md-6">
+                @php
+                    $message = Session::get('message');
+                    if ($message){
+                        echo $message;
+                        Session::put('message', null);
+                    }
+                @endphp
                 <div id="login-box" class="col-md-12">
-                    <form id="login-form" class="form" action="" method="post">
+                    <form id="login-form" class="form" action="{{route('show.dashboard')}}" method="post">
+                        @csrf
                         <h3 class="text-center text-info">Login</h3>
                         <div class="form-group">
-                            <label for="username" class="text-info">Username:</label><br>
-                            <input type="text" name="username" id="username" class="form-control">
+                            <label for="email" class="text-info">Email:</label><br>
+                            <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email">
                         </div>
                         <div class="form-group">
                             <label for="password" class="text-info">Password:</label><br>
-                            <input type="text" name="password" id="password" class="form-control">
+                            <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password">
                         </div>
                         <div class="form-group">
                             <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
@@ -53,6 +61,7 @@
                             <a href="#" class="text-info">Register here</a>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
