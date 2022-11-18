@@ -34,7 +34,7 @@
                         <div class="control-group hidden-phone">
                             <label class="control-label" for="textarea2">Category Description</label>
                             <div class="controls">
-                                <textarea class="cleditor" name="description" rows="3" required></textarea>
+                                <textarea class="cleditor" name="descriptions" rows="3" required></textarea>
                             </div>
 
                         </div>
