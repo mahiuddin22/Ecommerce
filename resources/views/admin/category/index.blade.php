@@ -1,5 +1,24 @@
 @extends('admin.admin_master')
 @section('content')
+
+    {{--    <div class="alert alert-success">--}}
+    {{--        <button type="button" class="close" data-dismiss="alert">×</button>--}}
+    {{--        @php--}}
+    {{--            $message = Session::get('message');--}}
+    {{--            if ($message){--}}
+    {{--                echo $message;--}}
+    {{--                Session::put('message', null);--}}
+    {{--            }--}}
+    {{--        @endphp--}}
+    {{--    </div>--}}
+    @php
+        $message = Session::get('message');
+        if ($message){
+            echo $message;
+            Session::put('message', null);
+        }
+    @endphp
+
     <div class="row-fluid sortable">
         <div class="box span12">
             <div class="box-header" data-original-title>
@@ -7,7 +26,6 @@
                 <div class="box-icon">
                     <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
                     <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
-                    <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
                 </div>
             </div>
             <div class="box-content">
@@ -24,32 +42,43 @@
                     </thead>
                     <tbody>
                     @foreach($categories as $key=>$category)
-                    <tr style="box-shadow: 2px 2px 2px #CCCCCC;">
-                        <td>{{$key+1}}</td>
-                        <td>{{$category->name}}</td>
-                        <td class="center">{{$category->descriptions}}</td>
-                        <td class="center">
-                            <img src="{{asset('storage/'.$category->image)}}" alt="default.png" style="height: 90px; width: 90px; border-radius: 5px; box-shadow: 2px 3px 4px #8c8c8c">
-                        </td>
-                        <td class="center">
-                            @if($category->status == 1)
-                                <span class="label label-success">Active</span>
-                            @else
-                                <span class="label label-important">Inactive</span>
-                            @endif
-                        </td>
-                        <td class="center">
-                            <a class="btn btn-success" href="#">
-                                <i class="halflings-icon white zoom-in"></i>
-                            </a>
-                            <a class="btn btn-info" href="#">
-                                <i class="halflings-icon white edit"></i>
-                            </a>
-                            <a class="btn btn-danger" href="#">
-                                <i class="halflings-icon white trash"></i>
-                            </a>
-                        </td>
-                    </tr>
+                        <tr style="box-shadow: 2px 2px 2px #CCCCCC;">
+                            <td>{{$key+1}}</td>
+                            <td>{{$category->name}}</td>
+                            <td class="center">{{$category->descriptions}}</td>
+                            <td class="center">
+                                <img src="{{asset('storage/'.$category->image)}}" alt="default.png"
+                                     style="height: 90px; width: 90px; border-radius: 5px; box-shadow: 2px 3px 4px #8c8c8c">
+                            </td>
+                            <td class="center">
+                                @if($category->status == 1)
+                                    <span class="label label-success">Active</span>
+                                @else
+                                    <span class="label label-important">Inactive</span>
+                                @endif
+                            </td>
+                            <td class="center">
+                                @if($category->status == 1)
+                                    <a class="btn btn-danger" href="{{route('catStatus',$category->id)}}">
+                                        <i class="halflings-icon white eye-close"></i>
+                                    </a>
+                                @else
+                                    <a class="btn btn-success" href="{{route('catStatus',$category->id)}}">
+                                        <i class="halflings-icon white eye-open"></i>
+                                    </a>
+                                @endif
+                                <a class="btn btn-info" href="{{url('/categories/'.$category->id.'/edit')}}">
+                                    <i class="halflings-icon white edit"></i>
+                                </a>
+                                <form action="{{url('/categories/'.$category->id)}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger" type="submit">
+                                        <i class="halflings-icon white trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
                     @endforeach
                     </tbody>
                 </table>
