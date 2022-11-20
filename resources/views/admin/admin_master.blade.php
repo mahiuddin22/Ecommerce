@@ -353,17 +353,43 @@
                                         class="hidden-tablet"> All Category</span></a></li>
                         </ul>
                     </li>
+
                     <li>
-                        <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Sub Category </span><span
-                                class="label label-important"> {{\App\Models\Category::count()}}</span></a>
+                        <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Sub Categories </span><span
+                                class="label label-important"> {{\App\Models\SubCategory::count()}}</span></a>
                         <ul>
                             <li><a class="submenu" href="{{url('/subcategories/create')}}"><i
-                                        class="icon-file-alt"></i><span class="hidden-tablet">Add Sub Category</span></a>
+                                        class="icon-file-alt"></i><span class="hidden-tablet">Add Sub Categories</span></a>
                             </li>
                             <li><a class="submenu" href="{{url('/subcategories/')}}"><i class="icon-file-alt"></i><span
                                         class="hidden-tablet"> All Sub Category</span></a></li>
                         </ul>
                     </li>
+
+                    <li>
+                        <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Brands </span><span
+                                class="label label-important"> {{\App\Models\Brand::count()}}</span></a>
+                        <ul>
+                            <li><a class="submenu" href="{{route('brand.create')}}"><i
+                                        class="icon-file-alt"></i><span class="hidden-tablet">Add Brand</span></a>
+                            </li>
+                            <li><a class="submenu" href="{{route('brand.index')}}"><i class="icon-file-alt"></i><span
+                                        class="hidden-tablet"> All Brands</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Units </span><span
+                                class="label label-important"> {{\App\Models\Unit::count()}}</span></a>
+                        <ul>
+                            <li><a class="submenu" href="{{route('unit.create')}}"><i
+                                        class="icon-file-alt"></i><span class="hidden-tablet">Add Brand</span></a>
+                            </li>
+                            <li><a class="submenu" href="{{route('unit.index')}}"><i class="icon-file-alt"></i><span
+                                        class="hidden-tablet"> All Units</span></a></li>
+                        </ul>
+                    </li>
+
                     <li><a href="form.html"><i class="icon-edit"></i><span class="hidden-tablet"> Forms</span></a></li>
                     <li><a href="chart.html"><i class="icon-list-alt"></i><span class="hidden-tablet"> Charts</span></a>
                     </li>

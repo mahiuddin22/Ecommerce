@@ -15,30 +15,19 @@
     <div class="row-fluid sortable">
         <div class="box span12">
             <div class="box-header" data-original-title>
-                <h2><i class="halflings-icon edit"></i><span class="break"></span>New Sub Category</h2>
+                <h2><i class="halflings-icon edit"></i><span class="break"></span>New Unit</h2>
 
             </div>
 
             <div class="box-content">
-                <form class="form-horizontal" action="{{url('/subcategories/')}}" method="post"
+                <form class="form-horizontal" action="{{route('unit.store')}}" method="post"
                       enctype="multipart/form-data">
                     @csrf
                     <fieldset>
                         <div class="control-group">
-                            <label class="control-label" for="date01">Category Name</label>
+                            <label class="control-label" for="date01">Unit Name</label>
                             <div class="controls" style="border: 1px solid #c4c4c4; padding: 5px; width: 490px;">
                                 <input type="text" class="input-xlarge" name="name" required>
-                            </div>
-                        </div>
-
-                        <div class="control-group">
-                            <label class="control-label">Add Sub Category</label>
-                            <div class="controls">
-                                <select name="subcategory" class="form-select" id="">
-                                    @foreach($categories as $category)
-                                        <option value="{{$category->id}}">{{$category->name}}</option>
-                                    @endforeach
-                                </select>
                             </div>
                         </div>
 
@@ -50,8 +39,8 @@
 
                         </div>
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">Add Sub Category</button>
-                            <a href="{{route('subcategories.index')}}" class="btn btn-danger">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Add Unit</button>
+                            <a href="{{route('unit.index')}}" class="btn btn-danger">Cancel</a>
                         </div>
 
                     </fieldset>
