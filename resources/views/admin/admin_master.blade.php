@@ -344,13 +344,24 @@
                     {{--                    <li><a href="widgets.html"><i class="icon-dashboard"></i><span class="hidden-tablet"> Widgets</span></a></li>--}}
                     <li>
                         <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Category </span><span
-                                class="label label-important"> 3 </span></a>
+                                class="label label-important"> {{\App\Models\Category::count()}} </span></a>
                         <ul>
                             <li><a class="submenu" href="{{url('/categories/create')}}"><i
                                         class="icon-file-alt"></i><span class="hidden-tablet">Add Category</span></a>
                             </li>
                             <li><a class="submenu" href="{{url('/categories/')}}"><i class="icon-file-alt"></i><span
                                         class="hidden-tablet"> All Category</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="dropmenu" href="#"><i class="icon-folder-close-alt"></i><span class="hidden-tablet"> Sub Category </span><span
+                                class="label label-important"> {{\App\Models\Category::count()}}</span></a>
+                        <ul>
+                            <li><a class="submenu" href="{{url('/subcategories/create')}}"><i
+                                        class="icon-file-alt"></i><span class="hidden-tablet">Add Sub Category</span></a>
+                            </li>
+                            <li><a class="submenu" href="{{url('/subcategories/')}}"><i class="icon-file-alt"></i><span
+                                        class="hidden-tablet"> All Sub Category</span></a></li>
                         </ul>
                     </li>
                     <li><a href="form.html"><i class="icon-edit"></i><span class="hidden-tablet"> Forms</span></a></li>

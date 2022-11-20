@@ -33,44 +33,43 @@
                     <thead>
                     <tr>
                         <th style="width: 5%;">ID</th>
+                        <th style="width: 15%;">Category</th>
                         <th style="width: 15%;">Name</th>
-                        <th style="width: 35%;">Description</th>
-                        <th style="width: 15%;">Image</th>
+                        <th style="width: 30%;">Description</th>
                         <th style="width: 15%;">Status</th>
                         <th style="width: 20%;">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($categories as $key=>$category)
+                    @foreach($subcategories as $key=>$subcategory)
                         <tr style="box-shadow: 2px 2px 2px #CCCCCC;">
                             <td style="border-bottom: 1px solid #c4c4c4;">{{$key+1}}</td>
-                            <td style="border-bottom: 1px solid #c4c4c4;">{{$category->name}}</td>
-                            <td style="border-bottom: 1px solid #c4c4c4;" class="center">{!! $category->descriptions !!}</td>
+                            <td style="border-bottom: 1px solid #c4c4c4;">{{$subcategory->category->name}}</td>
+                            <td style="border-bottom: 1px solid #c4c4c4;">{{$subcategory->name}}</td>
+                            <td style="border-bottom: 1px solid #c4c4c4;" class="center">{!! $subcategory->descriptions !!}</td>
+
                             <td style="border-bottom: 1px solid #c4c4c4;" class="center">
-                                <img src="{{asset('storage/'.$category->image)}}" alt="default.png"
-                                     style="height: 90px; width: 90px; border-radius: 5px; box-shadow: 2px 3px 4px #8c8c8c">
-                            </td>
-                            <td style="border-bottom: 1px solid #c4c4c4;" class="center">
-                                @if($category->status == 1)
+                                @if($subcategory->status == 1)
                                     <span class="label label-success">Active</span>
                                 @else
                                     <span class="label label-important">Inactive</span>
                                 @endif
                             </td>
+
                             <td style="border-bottom: 1px solid #c4c4c4;" class="center">
-                                @if($category->status == 1)
-                                    <a class="btn btn-danger" href="{{route('catStatus',$category->id)}}">
+                                @if($subcategory->status == 1)
+                                    <a class="btn btn-danger" href="{{route('catStatus',$subcategory->id)}}">
                                         <i class="halflings-icon white eye-close"></i>
                                     </a>
                                 @else
-                                    <a class="btn btn-success" href="{{route('catStatus',$category->id)}}">
+                                    <a class="btn btn-success" href="{{route('catStatus',$subcategory->id)}}">
                                         <i class="halflings-icon white eye-open"></i>
                                     </a>
                                 @endif
-                                <a class="btn btn-info" href="{{url('/categories/'.$category->id.'/edit')}}">
+                                <a class="btn btn-info" href="{{url('/subcategories/'.$subcategory->id.'/edit')}}">
                                     <i class="halflings-icon white edit"></i>
                                 </a>
-                                <form action="{{url('/categories/'.$category->id)}}" method="post" style="display: inline;">
+                                <form action="{{url('/subcategories/'.$subcategory->id)}}" method="post" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger" type="submit">
@@ -78,6 +77,7 @@
                                     </button>
                                 </form>
                             </td>
+
                         </tr>
                     @endforeach
                     </tbody>
