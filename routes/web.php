@@ -8,6 +8,9 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\SizesController;
+use App\Http\Controllers\ColorController;
+use App\Http\Controllers\ProductController;
 
 //backend routes are applicable here
 Route::get('/admin_login', [AdminController::class, 'index'])->name('admin.login');
@@ -45,5 +48,25 @@ Route::post('/unit/store', [UnitController::class, 'store'])->name('unit.store')
 Route::get('/unit/{id}/edit', [UnitController::class, 'edit'])->name('unit.edit');
 Route::put('/unit/{id}/update', [UnitController::class, 'update'])->name('unit.update');
 Route::delete('/unit/{id}/delete', [UnitController::class, 'destroy'])->name('unit.delete');
+
+//Size routes
+Route::resource('/size', SizesController::class);
+Route::get('/size-status/{sizes}', [SizesController::class, 'size_change'])->name('size.status');
+
+//color routes
+Route::resource('/color', ColorController::class);
+Route::get('/color-status/{color}', [ColorController::class, 'color_change'])->name('color.status');
+
+//product routes
+Route::resource('/product', ProductController::class);
+Route::get('/product-status/{product}', [ProductController::class, 'product_change'])->name('product.status');
+
+
+
+
+
+
+
+
 //frontend routes are applicable here
 Route::get('/', [HomeController::class, 'index'])->name('home');
