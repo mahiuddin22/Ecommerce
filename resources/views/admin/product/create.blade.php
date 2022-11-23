@@ -42,8 +42,8 @@
             </div>
 
             <div class="box-content">
-
-                <form class="form-inline" action="{{route('product.index')}}" method="post">
+                <form class="form-inline" action="{{route('product.store')}}" method="post" enctype="multipart/form-data">
+                    @csrf
                     <div class="design">
                         <div class="row">
                         <span class="custom">
@@ -113,8 +113,8 @@
                                <input type="text" class="input-xlarge" name="price" id="price" required>
                             </span>
                             <span class="custom">
-                                <label for="file">Add Image</label>
-                               <input type="file" name="file[]" id="file" multiple required>
+                                <label for="files">Add Image</label>
+                               <input type="file" name="image[]" id="files" multiple="" required>
                             </span>
                             <span class="custom">
                                 <label for="descriptions">Product Description</label><br>

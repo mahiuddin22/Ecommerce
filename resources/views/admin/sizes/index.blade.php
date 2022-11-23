@@ -1,23 +1,12 @@
 @extends('admin.admin_master')
 @section('content')
 
-    {{--    <div class="alert alert-success">--}}
-    {{--        <button type="button" class="close" data-dismiss="alert">×</button>--}}
-    {{--        @php--}}
-    {{--            $message = Session::get('message');--}}
-    {{--            if ($message){--}}
-    {{--                echo $message;--}}
-    {{--                Session::put('message', null);--}}
-    {{--            }--}}
-    {{--        @endphp--}}
-    {{--    </div>--}}
-    @php
-        $message = Session::get('message');
-        if ($message){
-            echo $message;
-            Session::put('message', null);
-        }
-    @endphp
+    @if(Session::has('message'))
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Success!</strong> {{Session::get('message')}}
+        </div>
+    @endif
 
     <div class="row-fluid sortable">
         <div class="box span12">

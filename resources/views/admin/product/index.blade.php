@@ -1,23 +1,12 @@
 @extends('admin.admin_master')
 @section('content')
 
-    {{--    <div class="alert alert-success">--}}
-    {{--        <button type="button" class="close" data-dismiss="alert">×</button>--}}
-    {{--        @php--}}
-    {{--            $message = Session::get('message');--}}
-    {{--            if ($message){--}}
-    {{--                echo $message;--}}
-    {{--                Session::put('message', null);--}}
-    {{--            }--}}
-    {{--        @endphp--}}
-    {{--    </div>--}}
-    @php
-        $message = Session::get('message');
-        if ($message){
-            echo $message;
-            Session::put('message', null);
-        }
-    @endphp
+    @if(Session::has('message'))
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Success!</strong> {{Session::get('message')}}
+        </div>
+    @endif
 
     <div class="row-fluid sortable">
         <div class="box span12">
@@ -33,44 +22,60 @@
                     <thead>
                     <tr>
                         <th style="width: 5%;">ID</th>
-                        <th style="width: 15%;">Name</th>
-                        <th style="width: 35%;">Description</th>
-                        <th style="width: 15%;">Image</th>
-                        <th style="width: 15%;">Status</th>
-                        <th style="width: 20%;">Actions</th>
+                        <th style="width: 5%;">Code</th>
+                        <th style="width: 9%;">Name</th>
+                        <th style="width: 16%;">Description</th>
+                        <th style="width: 8%;">Price</th>
+                        <th style="width: 20%;">Image</th>
+                        <th style="width: 5%;">Category</th>
+                        <th style="width: 5%;">Subcategory</th>
+                        <th style="width: 5%;">Brand</th>
+                        <th style="width: 5%;">Status</th>
+                        <th style="width: 28%;">Actions</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    @foreach($categories as $key=>$category)
+                    @foreach($products as $key=>$product)
+                        @php
+                            $product['image']= explode('|', $product->image);
+                        @endphp
                         <tr style="box-shadow: 2px 2px 2px #CCCCCC;">
                             <td style="border-bottom: 1px solid #c4c4c4;">{{$key+1}}</td>
-                            <td style="border-bottom: 1px solid #c4c4c4;">{{$category->name}}</td>
-                            <td style="border-bottom: 1px solid #c4c4c4;" class="center">{!! $category->descriptions !!}</td>
+                            <td style="border-bottom: 1px solid #c4c4c4;">{{$product->code}}</td>
+                            <td style="border-bottom: 1px solid #c4c4c4;">{{$product->name}}</td>
+                            <td style="border-bottom: 1px solid #c4c4c4;"
+                                class="center">{!! $product->descriptions !!}</td>
+                            <td style="border-bottom: 1px solid #c4c4c4;">&#2547; {{$product->price}}</td>
                             <td style="border-bottom: 1px solid #c4c4c4;" class="center">
-                                <img src="{{asset('storage/'.$category->image)}}" alt="default.png"
-                                     style="height: 90px; width: 90px; border-radius: 5px; box-shadow: 2px 3px 4px #8c8c8c">
+                                @foreach($product->image as $images)
+                                    <img src="{{asset('image/'.$images)}}" alt="default.png"
+                                         style="height: 70px; width: 70px; border-radius: 5px; box-shadow: 2px 3px 4px #8c8c8c">
+                                @endforeach
                             </td>
+                            <td style="border-bottom: 1px solid #c4c4c4;">{{$product->category->name}}</td>
+                            <td style="border-bottom: 1px solid #c4c4c4;">{{$product->subcat->name}}</td>
+                            <td style="border-bottom: 1px solid #c4c4c4;">{{$product->brand->name}}</td>
                             <td style="border-bottom: 1px solid #c4c4c4;" class="center">
-                                @if($category->status == 1)
+                                @if($product->status == 1)
                                     <span class="label label-success">Active</span>
                                 @else
                                     <span class="label label-important">Inactive</span>
                                 @endif
                             </td>
                             <td style="border-bottom: 1px solid #c4c4c4;" class="center">
-                                @if($category->status == 1)
-                                    <a class="btn btn-danger" href="{{route('catStatus',$category->id)}}">
+                                @if($product->status == 1)
+                                    <a class="btn btn-danger" href="{{route('product.status',$product->id)}}">
                                         <i class="halflings-icon white eye-close"></i>
                                     </a>
                                 @else
-                                    <a class="btn btn-success" href="{{route('catStatus',$category->id)}}">
+                                    <a class="btn btn-success" href="{{route('product.status',$product->id)}}">
                                         <i class="halflings-icon white eye-open"></i>
                                     </a>
                                 @endif
-                                <a class="btn btn-info" href="{{url('/categories/'.$category->id.'/edit')}}">
+                                <a class="btn btn-info" href="{{route('product.edit',$product->id)}}">
                                     <i class="halflings-icon white edit"></i>
                                 </a>
-                                <form action="{{url('/categories/'.$category->id)}}" method="post" style="display: inline;">
+                                <form action="{{route('product.destroy',$product->id)}}" method="post"
+                                      style="display: inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger" type="submit">
@@ -80,6 +85,8 @@
                             </td>
                         </tr>
                     @endforeach
+                    <tbody>
+
                     </tbody>
                 </table>
             </div>
