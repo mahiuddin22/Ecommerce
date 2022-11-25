@@ -94,7 +94,7 @@
                                                             class="tooltipp">add to wishlist</span></button>
                                                     <button class="add-to-compare"><i class="fa fa-exchange"></i><span
                                                             class="tooltipp">add to compare</span></button>
-                                                    <a href="{{route('product.show', $product->id)}}" class="quick-view"><i class="fa fa-eye"></i><span
+                                                    <a href="{{route('product.details', $product->id)}}" class="quick-view"><i class="fa fa-eye"></i><span
                                                             class="tooltip">quick view</span></a>
                                                 </div>
                                             </div>

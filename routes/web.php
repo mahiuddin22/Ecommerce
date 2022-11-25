@@ -65,4 +65,4 @@ Route::get('/product-status/{product}', [ProductController::class, 'product_chan
 
 //frontend routes are applicable here
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/product/details/{id}', [HomeController::class, 'show'])->name('product.show');
+Route::get('/product/details/{id}', [HomeController::class, 'ProductDetails'])->name('product.details');
