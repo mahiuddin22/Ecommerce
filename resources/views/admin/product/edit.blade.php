@@ -1,5 +1,31 @@
 @extends('admin.admin_master');
+@push('css')
+    <style>
+        .custom {
+            padding: 10px;
+            margin: 3px;
+            border: 1px solid #c4c4c4;
+            box-shadow: 1px 1px 3px #8c8c8c;
+        }
 
+        .custom input {
+            width: 60px;
+        }
+
+        .design {
+            padding: 10px;
+            box-shadow: 2px 2px 3px #c4c4c4;
+        }
+
+        .product_design cleditor {
+            margin-top: 40px;
+        }
+
+        .row {
+            margin-bottom: 20px;
+        }
+    </style>
+@endpush
 @section('content')
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -10,55 +36,113 @@
             </ul>
         </div>
     @endif
-
-
     <div class="row-fluid sortable">
         <div class="box span12">
             <div class="box-header" data-original-title>
-                <h2><i class="halflings-icon edit"></i><span class="break"></span>Add Category</h2>
-
+                <h2><i class="halflings-icon edit"></i><span class="break"></span>Add Product</h2>
             </div>
 
             <div class="box-content">
-                <form class="form-horizontal" action="{{url('/categories/'.$category->id)}}" method="post" enctype="multipart/form-data">
+                <form class="form-inline" action="{{route('product.update', $product->id)}}" method="post"
+                      enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <fieldset>
-                        <div class="control-group">
-                            <label class="control-label" for="date01">Category Name</label>
-                            <div class="controls" style="border: 1px solid #c4c4c4; padding: 5px; width: 490px;">
-                                <input type="text" class="input-xlarge" name="name" value="{{$category->name}}">
-                            </div>
+                    <div class="design">
+                        <div class="row">
+                        <span class="custom">
+                            <label for="category"> Category:</label>
+                            <select id="category" name="category">
+                                @foreach($categories as $category)
+                                    <option
+                                        {{$product->category->id == $category->id ? 'selected': ''}}
+                                        value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
+                            </select>
+                        </span>
+                            <span class="custom">
+                            <label> Subcategory:</label>
+                            <select name="subcategory" class="form-select" id="">
+                                @foreach($subcategories as $subcategory)
+                                    <option
+                                        {{$product->subcat->id == $subcategory->id ? 'selected': ''}}
+                                        value="{{$subcategory->id}}">{{$subcategory->name}}</option>
+                                @endforeach
+                            </select>
+                        </span>
+                            <span class="custom">
+                            <label for="brand"> Brand:</label>
+                            <select name="brand" class="form-select" id="brand">
+                                @foreach($brands as $brand)
+                                    <option
+                                        {{$product->brand->id == $brand->id ? 'selected': ''}}
+                                        value="{{$brand->id}}">{{$brand->name}}</option>
+                                @endforeach
+                            </select>
+                        </span>
                         </div>
-
-
-                        <div class="control-group hidden-phone">
-                            <label class="control-label" for="textarea2">Category Description</label>
-                            <div class="controls">
-                                <textarea class="cleditor" name="descriptions" rows="3" required>{{$category->descriptions}}</textarea>
-                            </div>
-
+                        <div class="row">
+                        <span class="custom">
+                            <label for="unit"> Unit:</label>
+                            <select name="unit" class="form-select" id="unit">
+                                @foreach($units as $unit)
+                                    <option
+                                        {{$product->unit->id == $unit->id ? 'selected': ''}}
+                                        value="{{$unit->id}}">{{$unit->name}}</option>
+                                @endforeach
+                            </select>
+                        </span>
+                            <span class="custom">
+                            <label for="size"> Size:</label>
+                            <select name="size" class="form-select" id="size" data-role="tagsinput">
+                                @foreach($sizes as $size)
+                                    <option
+                                        {{$product->size->id == $size->id ? 'selected': ''}}
+                                        value="{{$size->id}}">{{implode(',',json_decode($size->size))}}</option>
+                                @endforeach
+                            </select>
+                        </span>
+                            <span class="custom">
+                                <label for="color"> Color:</label>
+                                <select name="color" class="form-select" id="color">
+                                    @foreach($colors as $color)
+                                        <option
+                                            {{$product->color->id == $color->id ? 'selected': ''}}
+                                            value="{{$color->id}}">{{implode(',',json_decode($color->color))}}</option>
+                                    @endforeach
+                                </select>
+                        </span>
                         </div>
-
-                        <div class="control-group">
-                            <label class="control-label">File Upload</label>
-                            <div class="controls">
-                                <input type="file" name="image">
-                                <img src="{{asset('storage/'.$category->image)}}" alt="default.png"
-                                     style="height: 90px; width: 90px; border-radius: 5px; box-shadow: 2px 3px 4px #8c8c8c">
-                            </div>
+                        <div class="row product_design">
+                            <span class="custom">
+                                <label for="name">Product name</label>
+                                <input type="text" id="name" class="input-xlarge" name="name" value="{{$product->name}}"
+                                       required>
+                            </span>
+                            <span class="custom">
+                                <label for="code">Product Code</label>
+                               <input type="text" class="input-xlarge" name="code" id="code" value="{{$product->code}}"
+                                      required>
+                            </span>
+                            <span class="custom">
+                                <label for="price">Product Price</label>
+                               <input type="text" class="input-xlarge" name="price" id="price"
+                                      value="{{$product->price}}" required>
+                            </span>
+                            <span class="custom">
+                                <label for="files">Add Image</label>
+                               <input type="file" name="image[]" id="files" multiple="">
+                            </span>
+                            <span class="custom">
+                                <label for="descriptions">Product Description</label><br>
+                            </span>
                         </div>
-
-
-                        <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">Update Category</button>
-                            <a href="{{route('admin.dashboard')}}" class="btn btn-danger">Cancel</a>
-                        </div>
-                    </fieldset>
+                        <textarea class="cleditor" id="descriptions" name="descriptions" required>{!! $product->descriptions !!}"</textarea>
+                        <button style="margin-top: 10px;" type="submit" class="btn btn-primary">Update Product</button>
+                        <a href="{{route('admin.dashboard')}}" style="margin-top: 10px;"
+                           class="btn btn-danger">Cancel</a>
+                    </div>
                 </form>
-
             </div>
         </div><!--/span-->
-    </div><!--/row-->
     </div><!--/row-->
 @endsection
