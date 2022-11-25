@@ -53,10 +53,6 @@
                                 <img src="{{asset('image/'.$image)}}" alt="">
                             </div>
                         @endforeach
-
-                        <div class="product-preview">
-                            <img src="{{asset('./img/product08.png')}}" alt="">
-                        </div>
                     </div>
                 </div>
                 <!-- /Product thumb imgs -->
@@ -381,39 +377,51 @@
                         <h3 class="title">Related Products</h3>
                     </div>
                 </div>
+            @foreach($randomProduct as $rel_product)
+                @php
+                    $rel_product['image'] = explode('|', $rel_product->image);
+                    $images = $rel_product->image[0];
 
+                    $old = $rel_product->price + 70;
+                    $new = $rel_product->price;
+                @endphp
                 <!-- product -->
-                <div class="col-md-3 col-xs-6">
-                    <div class="product">
-                        <div class="product-img">
-                            <img src="{{asset('./img/product01.png')}}" alt="">
-                            <div class="product-label">
-                                <span class="sale">-30%</span>
+                    <div class="col-md-3 col-xs-6">
+                        <div class="product">
+                            <div class="product-img">
+                                <a href="{{route('product.details', $rel_product->id)}}">
+                                    <img src="{{asset('image/'.$images)}}" height="256" width="256" alt="">
+                                </a>
+                                <div class="product-label">
+                                    <span class="sale">{{round((($old-$new)/$old)*100,0)}}%</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="product-body">
-                            <p class="product-category">Category</p>
-                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                            <h4 class="product-price">$980.00
-                                <del class="product-old-price">$990.00</del>
-                            </h4>
-                            <div class="product-rating">
+                            <div class="product-body">
+                                <p class="product-category">{{$rel_product->category->name}}</p>
+                                <h3 class="product-name"><a
+                                        href="{{route('product.details', $rel_product->id)}}">{{$rel_product->name}}</a>
+                                </h3>
+                                <h4 class="product-price">&#2547 {{$rel_product->price}}
+                                    <del class="product-old-price">&#2547 {{$rel_product->price +70}}</del>
+                                </h4>
+                                <div class="product-rating">
+                                </div>
+                                <div class="product-btns">
+                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span>
+                                    </button>
+                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span>
+                                    </button>
+                                    <button class="quick-view"><i class="fa fa-eye"></i><span
+                                            class="tooltipp">quick view</span></button>
+                                </div>
                             </div>
-                            <div class="product-btns">
-                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span>
-                                </button>
-                                <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span>
-                                </button>
-                                <button class="quick-view"><i class="fa fa-eye"></i><span
-                                        class="tooltipp">quick view</span></button>
+                            <div class="add-to-cart">
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
                             </div>
-                        </div>
-                        <div class="add-to-cart">
-                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
                         </div>
                     </div>
-                </div>
-                <!-- /product -->
+                    <!-- /product -->
+                @endforeach
             </div>
             <!-- /row -->
         </div>
