@@ -70,7 +70,8 @@
                                         @endphp
                                         <div class="product">
                                             <div class="product-img">
-                                                <img src="{{asset('image/'.$images)}}" alt="default.png" height="256" width="256">
+                                                <img src="{{asset('image/'.$images)}}" alt="default.png" height="256"
+                                                     width="256">
                                                 <div class="product-label">
                                                     <span class="sale">{{round((($old-$new)/$old)*100, 2)}}%</span>
                                                     <span class="new">&#2547; {{$product->price}}</span>
@@ -80,7 +81,8 @@
                                                 <p class="product-category">Category</p>
                                                 <h3 class="product-name"><a href="#">{{$product->name}}</a></h3>
                                                 <h4 class="product-price">&#2547; {{$product->price}}
-                                                    <del class="product-old-price">&#2547; {{$product->price + 70}}</del>
+                                                    <del class="product-old-price">
+                                                        &#2547; {{$product->price + 70}}</del>
                                                 </h4>
                                                 {{--                                                <div class="product-rating">--}}
                                                 {{--                                                    <i class="fa fa-star"></i>--}}
@@ -94,16 +96,21 @@
                                                             class="tooltipp">add to wishlist</span></button>
                                                     <button class="add-to-compare"><i class="fa fa-exchange"></i><span
                                                             class="tooltipp">add to compare</span></button>
-                                                    <a href="{{route('product.details', $product->id)}}" class="quick-view"><i class="fa fa-eye"></i><span
+                                                    <a href="{{route('product.details', $product->id)}}"
+                                                       class="quick-view"><i class="fa fa-eye"></i><span
                                                             class="tooltip">quick view</span></a>
                                                 </div>
                                             </div>
-                                            <div class="add-to-cart">
-                                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add
-                                                    to
-                                                    cart
-                                                </button>
-                                            </div>
+                                            <form action="{{route('addToCart', $product->id)}}" method="post">
+                                                @csrf
+                                                <div class="add-to-cart">
+                                                    <input type="hidden" name="quantity" value="1">
+                                                    <input type="hidden" name="id" value="{{$product->id}}">
+                                                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>
+                                                        add to cart
+                                                    </button>
+                                                </div>
+                                            </form>
                                         </div>
                                         <!-- /product -->
                                     @endforeach

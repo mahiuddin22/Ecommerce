@@ -11,6 +11,7 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\SizesController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 
 //backend routes are applicable here
 Route::get('/admin_login', [AdminController::class, 'index'])->name('admin.login');
@@ -69,3 +70,8 @@ Route::get('/product/details/{id}', [HomeController::class, 'ProductDetails'])->
 Route::get('category/{id}', [HomeController::class, 'productCategory'])->name('product.category');
 Route::get('subcategory/product/{id}', [HomeController::class, 'subcategoryProduct'])->name('productBySubcat');
 Route::get('brand/product/{id}', [HomeController::class, 'brandProduct'])->name('productByBrand');
+
+
+
+// Add to Cart
+Route::post('add-to-cart/{id}', [CartController::class, 'AddToCart'])->name('addToCart');
