@@ -75,3 +75,4 @@ Route::get('brand/product/{id}', [HomeController::class, 'brandProduct'])->name(
 
 // Add to Cart
 Route::post('add-to-cart/{id}', [CartController::class, 'AddToCart'])->name('addToCart');
+Route::get('delete-cart/{id}', [CartController::class, 'destroy'])->name('delete-cart');

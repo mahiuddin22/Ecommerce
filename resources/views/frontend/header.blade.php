@@ -86,12 +86,15 @@
                                                 <img src="{{asset('image/'.$images)}}" alt="">
                                             </div>
                                             <div class="product-body">
-                                                <h3 class="product-name"><a href="#">{{$cart['name']}}</a></h3>
+                                                <h3 class="product-name"><a
+                                                        href="{{route('product.details', $cart['id'])}}">{{$cart['name']}}</a>
+                                                </h3>
                                                 <h4 class="product-price"><span
                                                         class="qty">{{$cart['quantity']}}x</span>&#2547; {{$cart['price']}}
                                                 </h4>
                                             </div>
-                                            <button class="delete"><i class="fa fa-close"></i></button>
+                                            <a href="{{route('delete-cart',$cart['id'])}}" class="delete"><i
+                                                    class="fa fa-close"></i></a>
                                         </div>
                                     @endforeach
 
