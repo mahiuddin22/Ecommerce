@@ -12,6 +12,7 @@ use App\Http\Controllers\SizesController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 //backend routes are applicable here
 Route::get('/admin_login', [AdminController::class, 'index'])->name('admin.login');
@@ -73,6 +74,13 @@ Route::get('brand/product/{id}', [HomeController::class, 'brandProduct'])->name(
 
 
 
-// Add to Cart
+//Cart
 Route::post('add-to-cart/{id}', [CartController::class, 'AddToCart'])->name('addToCart');
 Route::get('delete-cart/{id}', [CartController::class, 'destroy'])->name('delete-cart');
+
+
+//checkout
+Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
+
+//login before checkout
+Route::get('user/login', [CheckoutController::class, 'login'])->name('login');
