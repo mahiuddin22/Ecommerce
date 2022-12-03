@@ -9,7 +9,14 @@
             </ul>
             <ul class="header-links pull-right">
                 <li><a href="#">&#2547; BDT</a></li>
-                <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                @php
+                    $customer_id = Session::get('id');
+                @endphp
+                @if($customer_id)
+                    <li><a href="{{route('customer.logout')}}"><i class="fa fa-user-o"></i>Logout</a></li>
+                @else
+                    <li><a href="{{route('login')}}"><i class="fa fa-user-o"></i>Login</a></li>
+                @endif
             </ul>
         </div>
     </div>
@@ -104,8 +111,12 @@
                                     <h5>SUBTOTAL: &#2547; {{Cart::getTotal()}}</h5>
                                 </div>
                                 <div class="cart-btns">
-                                    <a href="{{route('login')}}">View Cart</a>
-                                    <a href="{{route('checkout')}}">Checkout <i class="fa fa-arrow-circle-right"></i></a>
+                                    <a href="{{route('view.cart')}}">View Cart</a>
+                                    @if($customer_id)
+                                        <a href="{{route('checkout')}}">Checkout <i class="fa fa-arrow-circle-right"></i> </a>
+                                    @else
+                                        <a href="{{route('login')}}">Checkout <i class="fa fa-arrow-circle-right"></i> </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>

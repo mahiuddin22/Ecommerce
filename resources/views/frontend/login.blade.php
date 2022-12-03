@@ -68,40 +68,54 @@
         }
     </style>
     <div class="container login-container">
+
+        @if(Session::has('message'))
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>Error!</strong> {{Session::get('message')}}
+            </div>
+        @endif
+
         <div class="row">
             <div class="col-md-6 login-form-1">
                 <h3>Login</h3>
-
-                <div class="form-group">
-                    <input type="text" name="email" class="form-control" placeholder="Your Email *" value=""/>
-                </div>
-                <div class="form-group">
-                    <input type="password" name="password" class="form-control" placeholder="Your Password *" value=""/>
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btnSubmit" value="Login"/>
-                </div>
+                <form action="{{route('customer.login')}}" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <input type="text" name="email" class="form-control" placeholder="Your Email *" value="" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" placeholder="Your Password *"value="" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btnSubmit" value="Login"/>
+                    </div>
+                </form>
             </div>
             <div class="col-md-6 login-form-2">
                 <div class="login-logo">
                     <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
                 </div>
                 <h3>Registration</h3>
-                <div class="form-group">
-                    <input type="text" name="name" class="form-control" placeholder="Your Name *" value=""/>
-                </div>
-                <div class="form-group">
-                    <input type="email" name="email" class="form-control" placeholder="Your Email *" value=""/>
-                </div>
-                <div class="form-group">
-                    <input type="password" name="password" class="form-control" placeholder="Your Password *" value=""/>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="mobile" class="form-control" placeholder="Your Mobile Number *" value=""/>
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btnSubmit" value="Register"/>
-                </div>
+                <form action="{{route('customer.registration')}}" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" placeholder="Your Name *" value="" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control" placeholder="Your Email *" value="" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" placeholder="Your Password *"
+                               value="" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="mobile" class="form-control" placeholder="Your Mobile Number *"
+                               value="" required/>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btnSubmit" value="Register"/>
+                    </div>
                 </form>
             </div>
         </div>

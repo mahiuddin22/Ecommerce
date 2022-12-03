@@ -13,6 +13,7 @@ use App\Http\Controllers\ColorController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CustomerController;
 
 //backend routes are applicable here
 Route::get('/admin_login', [AdminController::class, 'index'])->name('admin.login');
@@ -81,6 +82,11 @@ Route::get('delete-cart/{id}', [CartController::class, 'destroy'])->name('delete
 
 //checkout
 Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
-
+Route::get('login/check', [CheckoutController::class, 'checklogin'])->name('login');
 //login before checkout
-Route::get('user/login', [CheckoutController::class, 'login'])->name('login');
+Route::get('cart/table', [CheckoutController::class, 'viewCart'])->name('view.cart');
+
+//Customer login
+Route::post('customer/login', [CustomerController::class, 'login'])->name('customer.login');
+Route::get('customer/logout', [CustomerController::class, 'logout'])->name('customer.logout');
+Route::post('customer/registration', [CustomerController::class, 'registration'])->name('customer.registration');
