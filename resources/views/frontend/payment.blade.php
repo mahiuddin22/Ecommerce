@@ -3,7 +3,7 @@
 @section('content')
     <!-- Order Details -->
     <div class="col-md-3"></div>
-    <div class="col-md-6 order-details" style="margin: 100px 0 100px; 0">
+    <div class="col-md-6 order-details" style="margin: 100px 0 100px 0;">
         <div class="section-title text-center">
             <h3 class="title">Your Order</h3>
         </div>
@@ -13,22 +13,21 @@
                 <div><strong>TOTAL</strong></div>
             </div>
             <div class="order-products">
-                <div class="order-col">
-                    <div>1x Product Name Goes Here</div>
-                    <div>$980.00</div>
-                </div>
-                <div class="order-col">
-                    <div>2x Product Name Goes Here</div>
-                    <div>$980.00</div>
-                </div>
+                @foreach($cart_array as $cart)
+                    <div class="order-col">
+                        <div>{{$cart['quantity']}}x {{$cart['name']}}</div>
+                        <div>&#2547; {{Cart::get($cart['id'])->getPriceSum()}}</div>
+                    </div>
+                @endforeach
             </div>
+
             <div class="order-col">
                 <div>Shiping</div>
-                <div><strong>FREE</strong></div>
+                <div><strong>&#2547; 50</strong></div>
             </div>
             <div class="order-col">
                 <div><strong>TOTAL</strong></div>
-                <div><strong class="order-total">$2940.00</strong></div>
+                <div><strong class="order-total">&#2547; {{Cart::getTotal()+50}}</strong></div>
             </div>
         </div>
         <div class="payment-method">
