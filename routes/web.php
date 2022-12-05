@@ -65,14 +65,12 @@ Route::resource('/product', ProductController::class);
 Route::get('/product-status/{product}', [ProductController::class, 'product_change'])->name('product.status');
 
 
-
 //frontend routes are applicable here
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/product/details/{id}', [HomeController::class, 'ProductDetails'])->name('product.details');
 Route::get('category/{id}', [HomeController::class, 'productCategory'])->name('product.category');
 Route::get('subcategory/product/{id}', [HomeController::class, 'subcategoryProduct'])->name('productBySubcat');
 Route::get('brand/product/{id}', [HomeController::class, 'brandProduct'])->name('productByBrand');
-
 
 
 //Cart
@@ -90,3 +88,8 @@ Route::get('cart/table', [CheckoutController::class, 'viewCart'])->name('view.ca
 Route::post('customer/login', [CustomerController::class, 'login'])->name('customer.login');
 Route::get('customer/logout', [CustomerController::class, 'logout'])->name('customer.logout');
 Route::post('customer/registration', [CustomerController::class, 'registration'])->name('customer.registration');
+
+
+//Shipping info
+Route::post('shipping/information', [CheckoutController::class, 'shippingInfo'])->name('shipping.info');
+Route::get('payment/information', [CheckoutController::class, 'paymentInfo'])->name('payment.info');
