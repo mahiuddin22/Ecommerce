@@ -5,7 +5,7 @@
     <div class="col-md-3"></div>
     <div class="col-md-6 order-details" style="margin: 100px 0 100px 0;">
         <div class="section-title text-center">
-            <h3 class="title">Your Order</h3>
+            <h3 class="title text-info">Your Order</h3>
         </div>
         <div class="order-summary">
             <div class="order-col">
@@ -30,49 +30,62 @@
                 <div><strong class="order-total">&#2547; {{Cart::getTotal()+50}}</strong></div>
             </div>
         </div>
-        <div class="payment-method">
-            <div class="input-radio">
-                <input type="radio" name="payment" id="payment-1">
-                <label for="payment-1">
-                    <span></span>
-                    Direct Bank Transfer
-                </label>
-                <div class="caption">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
+        <form action="{{route('place.order')}}" method="post">
+            @csrf
+            <div class="section-title text-center">
+                <h4 class="title text-primary">Please select a payment method</h4>
+            </div>
+            <div class="payment-method">
+                <div class="input-radio">
+                    <input type="radio" name="payment" id="payment-1" value="cash on delivery">
+                    <label for="payment-1">
+                        <span></span>
+                        Cash on Delivery
+                    </label>
+                    <div class="caption">
+                        <p>Payment after product in hand</p>
+                    </div>
+                </div>
+                <div class="input-radio">
+                    <input type="radio" name="payment" id="payment-2" value="bkash">
+                    <label for="payment-2">
+                        <span></span>
+                        Bkash
+                    </label>
+                    <div class="caption">
+                        <p>Send vie bkash. Bkash No: 01610440622</p>
+                    </div>
+                </div>
+                <div class="input-radio">
+                    <input type="radio" name="payment" id="payment-3" value="rocket">
+                    <label for="payment-3">
+                        <span></span>
+                        Rocket
+                    </label>
+                    <div class="caption">
+                        <p>Send vie rocket. Rocket No: 016104406225</p>
+                    </div>
+                </div>
+                <div class="input-radio">
+                    <input type="radio" name="payment" id="payment-4" value="nagad">
+                    <label for="payment-4">
+                        <span></span>
+                        Nagad
+                    </label>
+                    <div class="caption">
+                        <p>Send vie nagad. Nagad No: 016104406225</p>
+                    </div>
                 </div>
             </div>
-            <div class="input-radio">
-                <input type="radio" name="payment" id="payment-2">
-                <label for="payment-2">
+            <div class="input-checkbox">
+                <input type="checkbox" id="terms">
+                <label for="terms">
                     <span></span>
-                    Cheque Payment
+                    I've read and accept the <a href="#">terms & conditions</a>
                 </label>
-                <div class="caption">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
-                </div>
             </div>
-            <div class="input-radio">
-                <input type="radio" name="payment" id="payment-3">
-                <label for="payment-3">
-                    <span></span>
-                    Paypal System
-                </label>
-                <div class="caption">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
-                </div>
-            </div>
-        </div>
-        <div class="input-checkbox">
-            <input type="checkbox" id="terms">
-            <label for="terms">
-                <span></span>
-                I've read and accept the <a href="#">terms & conditions</a>
-            </label>
-        </div>
-        <a href="#" class="primary-btn order-submit">Place order</a>
+            <button type="submit" class="primary-btn" style="float: right;">Place order</button>
+        </form>
     </div>
     <div class="col-md-3"></div>
     <!-- /Order Details -->

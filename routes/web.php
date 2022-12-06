@@ -93,3 +93,6 @@ Route::post('customer/registration', [CustomerController::class, 'registration']
 //Shipping info
 Route::post('shipping/information', [CheckoutController::class, 'shippingInfo'])->name('shipping.info');
 Route::get('payment/information', [CheckoutController::class, 'paymentInfo'])->name('payment.info');
+
+//Place Order
+Route::post('order/place', [CheckoutController::class, 'placeOrder'])->name('place.order');
